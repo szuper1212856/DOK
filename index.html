@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creascola DÖK</title>
+<meta name="description" content="A Creascola Diákönkormányzatának hivatalos oldala. Hírek, űrlapok, pályázatok és belépés a DÖK Appba.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090F;
+  --text:#EDF1F7;
+  --muted:#93A0B4;
+  --line:rgba(255,255,255,.10);
+  --mint:#3BE08C;
+  --cyan:#38D8F7;
+  --violet:#9B6BFF;
+  --pink:#FF5FA2;
+  --amber2:#FFB02E;
+  --paprika:#FF4B3B;
+  --wrap:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:17px;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.wordmark,.stat b,.news-date b{font-family:"Bricolage Grotesque","Inter",sans-serif;letter-spacing:-.03em;line-height:1.02;font-weight:700}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:4px;border-radius:6px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px;position:relative;z-index:2}
+
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.55}
+.orb.a{width:620px;height:620px;background:radial-gradient(circle,#1FBF6C,transparent 68%);top:-200px;left:-120px;animation:drift 26s ease-in-out infinite}
+.orb.b{width:540px;height:540px;background:radial-gradient(circle,#7B3BFF,transparent 68%);top:60px;right:-160px;animation:drift 31s ease-in-out infinite reverse}
+.orb.c{width:620px;height:620px;background:radial-gradient(circle,#FF3D6E,transparent 70%);top:760px;left:-180px;animation:drift 36s ease-in-out infinite}
+.orb.d{width:680px;height:680px;background:radial-gradient(circle,#159FD6,transparent 70%);top:1500px;right:-200px;animation:drift 40s ease-in-out infinite reverse}
+.orb.e{width:560px;height:560px;background:radial-gradient(circle,#FF8A1F,transparent 70%);top:2500px;left:25%;animation:drift 34s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(90px,60px) scale(1.14)}66%{transform:translate(-70px,30px) scale(.92)}}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.2;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.topline{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;background:linear-gradient(90deg,var(--mint),var(--cyan),var(--violet),var(--pink),var(--amber2),var(--mint));background-size:300% 100%;animation:slideBg 12s linear infinite}
+@keyframes slideBg{to{background-position:300% 0}}
+
+header{position:fixed;top:3px;left:0;right:0;z-index:60;transition:background .35s,border-color .35s;border-bottom:1px solid transparent}
+header.stuck{background:rgba(7,9,15,.72);backdrop-filter:blur(16px) saturate(160%);border-bottom-color:var(--line)}
+header .wrap{display:flex;align-items:center;gap:30px;height:74px}
+.wordmark{display:flex;align-items:center;gap:11px;font-size:19px;font-weight:800}
+.tri{width:9px;height:28px;border-radius:3px;background:linear-gradient(180deg,var(--paprika) 0 33%,#fff 33% 66%,var(--mint) 66%);box-shadow:0 0 20px rgba(59,224,140,.5)}
+nav{display:flex;gap:26px;margin-left:auto;font-size:15px;font-weight:500;color:var(--muted)}
+nav a{position:relative;padding:4px 0}
+nav a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,var(--mint),var(--cyan));transition:width .3s;border-radius:2px}
+nav a:hover{color:var(--text)}
+nav a:hover::after{width:100%}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-size:15px;font-weight:600;padding:13px 22px;border-radius:12px;border:1px solid transparent;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s,background .25s,border-color .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn-grad{background:linear-gradient(110deg,var(--mint),var(--cyan) 55%,var(--violet));background-size:200% 100%;color:#05100A;box-shadow:0 12px 34px -12px rgba(56,216,247,.75);animation:shift 7s ease infinite}
+@keyframes shift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.btn-grad::after{content:"";position:absolute;top:0;left:-120%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);animation:sheen 5s ease-in-out infinite}
+@keyframes sheen{0%,74%{left:-120%}90%,100%{left:170%}}
+.btn-glass{background:rgba(255,255,255,.05);border-color:var(--line);color:var(--text);backdrop-filter:blur(8px)}
+.btn-glass:hover{border-color:rgba(155,107,255,.6);background:rgba(155,107,255,.12)}
+.btn-red{background:linear-gradient(120deg,var(--pink),var(--paprika));color:#fff;padding:11px 20px;box-shadow:0 12px 30px -12px rgba(255,75,59,.85)}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor;animation:pulse 2.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.6)}70%{box-shadow:0 0 0 9px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+
+.hero{padding:190px 0 90px}
+.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:60px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;color:#CFE9FF;background:linear-gradient(100deg,rgba(59,224,140,.14),rgba(155,107,255,.16));border:1px solid rgba(255,255,255,.16);padding:7px 15px;border-radius:999px;backdrop-filter:blur(6px)}
+h1{font-size:clamp(44px,7vw,86px);font-weight:800;margin-top:26px}
+h1 .word{display:inline-block;opacity:0;transform:translateY(30px) rotate(2deg);animation:word .9s cubic-bezier(.2,.8,.25,1) forwards;animation-delay:calc(var(--i) * .07s)}
+h1 .grad{background:linear-gradient(100deg,var(--mint) 5%,var(--cyan) 40%,var(--violet) 75%,var(--pink) 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:word .9s cubic-bezier(.2,.8,.25,1) forwards,shift 8s ease infinite;animation-delay:calc(var(--i) * .07s),0s}
+@keyframes word{to{opacity:1;transform:none}}
+.lead{margin-top:24px;font-size:19px;color:var(--muted);max-width:46ch;opacity:0;animation:fade .8s ease .55s forwards}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px;opacity:0;animation:fade .8s ease .7s forwards}
+@keyframes fade{to{opacity:1}}
+.stats{display:flex;gap:42px;margin-top:52px;padding-top:26px;border-top:1px solid var(--line);flex-wrap:wrap;opacity:0;animation:fade .8s ease .85s forwards}
+.stat b{display:block;font-size:36px;background:linear-gradient(160deg,#fff,var(--c,var(--mint)));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat span{font-size:13.5px;color:var(--muted)}
+
+.pinned{position:relative;padding:32px;border-radius:24px;background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid var(--line);backdrop-filter:blur(18px);transform:perspective(1000px);transition:transform .4s ease;opacity:0;animation:fade .9s ease .5s forwards}
+.pinned::before{content:"";position:absolute;inset:0;border-radius:24px;padding:1.5px;background:linear-gradient(140deg,var(--mint),var(--cyan) 35%,var(--violet) 65%,var(--pink));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.85;pointer-events:none}
+.pinned .tagline{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--pink)}
+.pinned h2{font-size:30px;margin-top:14px}
+.pinned p{margin-top:14px;font-size:15px;color:var(--muted)}
+.pinned dl{margin-top:24px;border-top:1px solid var(--line);padding-top:18px;font-size:15px}
+.pinned dl div{display:flex;justify-content:space-between;gap:16px;padding:7px 0}
+.pinned dt{color:var(--muted)}
+.pinned dd{font-weight:600}
+.pinned .btn{margin-top:24px;width:100%}
+
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(59,224,140,.07),rgba(155,107,255,.07),rgba(255,95,162,.07));overflow:hidden;position:relative;z-index:2;padding:15px 0}
+.ticker-track{display:flex;gap:56px;width:max-content;animation:slide 34s linear infinite;font-size:14.5px;color:var(--muted);white-space:nowrap}
+.ticker-track b{font-weight:600}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+section{padding:110px 0;position:relative;z-index:2}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:48px}
+.sec-head h2{font-size:clamp(32px,4.6vw,54px)}
+.sec-head h2 em{font-style:normal;background:linear-gradient(100deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec-head p{color:var(--muted);font-size:16.5px;max-width:42ch}
+
+.news-list{display:grid;gap:14px}
+.news-item{display:grid;grid-template-columns:120px 1fr auto;gap:30px;align-items:center;padding:26px 30px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.03);position:relative;overflow:hidden;transition:transform .35s,border-color .35s,background .35s}
+.news-item::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c);opacity:.85}
+.news-item::after{content:"";position:absolute;inset:0;opacity:0;transition:opacity .35s;background:radial-gradient(480px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--c) 22%,transparent),transparent 62%)}
+.news-item:hover{transform:translateX(7px);border-color:color-mix(in srgb,var(--c) 55%,transparent);background:rgba(255,255,255,.06)}
+.news-item:hover::after{opacity:1}
+.news-item.featured{padding:40px 34px;background:linear-gradient(120deg,color-mix(in srgb,var(--c) 14%,transparent),rgba(255,255,255,.02))}
+.news-date{font-size:13.5px;color:var(--muted);position:relative;z-index:2}
+.news-date b{display:block;font-size:28px;color:var(--c)}
+.news-body{position:relative;z-index:2}
+.news-body h3{font-size:22px}
+.news-item.featured h3{font-size:clamp(26px,3.2vw,34px);max-width:22ch}
+.news-body p{margin-top:9px;color:var(--muted);font-size:15.5px;max-width:64ch}
+.tag{display:inline-block;margin-bottom:10px;font-size:12px;font-weight:600;color:var(--c);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);background:color-mix(in srgb,var(--c) 14%,transparent);padding:3px 11px;border-radius:999px}
+.arrow{position:relative;z-index:2;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);transition:all .35s}
+.news-item:hover .arrow{background:var(--c);color:#07090F;border-color:var(--c);transform:rotate(-45deg);box-shadow:0 0 26px -4px var(--c)}
+
+.forms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.form-card{display:flex;flex-direction:column;gap:12px;padding:30px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(165deg,rgba(255,255,255,.06),rgba(255,255,255,.015));position:relative;overflow:hidden;transition:transform .4s cubic-bezier(.2,.8,.3,1),border-color .4s,box-shadow .4s}
+.form-card .bar{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--c),transparent)}
+.form-card::after{content:"";position:absolute;inset:0;opacity:0;transition:opacity .4s;background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--c) 26%,transparent),transparent 64%)}
+.form-card:hover{transform:translateY(-8px);border-color:color-mix(in srgb,var(--c) 55%,transparent);box-shadow:0 30px 55px -30px color-mix(in srgb,var(--c) 70%,transparent)}
+.form-card:hover::after{opacity:1}
+.form-card > *{position:relative;z-index:2}
+.row{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted)}
+.form-card h3{font-size:21px}
+.form-card p{font-size:15px;color:var(--muted)}
+.form-card .foot{margin-top:auto;padding-top:18px;font-size:14.5px;font-weight:600;color:var(--c)}
+.form-card.soon-card{opacity:.6}
+.form-card.soon-card .foot{color:var(--muted)}
+.pill{font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid}
+.pill.open{color:#05100A;background:var(--mint);border-color:var(--mint)}
+.pill.rolling{color:#FFD9A8;background:rgba(255,176,46,.16);border-color:rgba(255,176,46,.45)}
+.pill.soon{color:var(--muted);background:rgba(255,255,255,.05);border-color:var(--line)}
+.type{font-weight:600;color:var(--text)}
+
+.app-band{position:relative;border-radius:32px;padding:70px 60px;overflow:hidden;background:linear-gradient(135deg,#0C2B6B,#151034 40%,#3A0F42 70%,#4A1020);border:1px solid rgba(255,255,255,.14)}
+.app-band::before{content:"";position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(56,216,247,.45),transparent 65%);top:-220px;right:-120px;filter:blur(30px)}
+.app-band::after{content:"";position:absolute;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(59,224,140,.38),transparent 65%);bottom:-240px;left:-100px;filter:blur(30px)}
+.app-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.app-band h2{font-size:clamp(32px,4.4vw,52px);max-width:15ch}
+.app-band p{margin-top:18px;color:#C4CDE4;font-size:17px;max-width:46ch}
+.app-url{margin-top:16px;font-size:14px;color:#8C97B5}
+.app-list{list-style:none;display:grid;gap:10px}
+.app-list li{display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);font-size:15.5px;backdrop-filter:blur(10px);transition:transform .3s,background .3s}
+.app-list li:hover{transform:translateX(8px);background:rgba(255,255,255,.13)}
+.app-list i{width:28px;height:28px;border-radius:9px;background:linear-gradient(140deg,var(--c),rgba(255,255,255,.25));flex:none;box-shadow:0 0 20px -4px var(--c)}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
+.about h2{font-size:clamp(30px,4vw,46px)}
+.about p{color:var(--muted);margin-top:20px;max-width:50ch}
+.facts{border-top:1px solid var(--line)}
+.facts div{display:flex;justify-content:space-between;gap:20px;padding:17px 0;border-bottom:1px solid var(--line);font-size:16px;transition:padding-left .3s,border-color .3s}
+.facts div:hover{padding-left:12px;border-bottom-color:var(--cyan)}
+.facts dt{color:var(--muted)}
+.facts dd{font-weight:600}
+
+footer{border-top:1px solid var(--line);padding:70px 0 44px;position:relative;z-index:2;background:linear-gradient(180deg,transparent,rgba(155,107,255,.12))}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:44px}
+footer h4{font-size:14.5px;font-weight:600;margin-bottom:16px}
+footer ul{list-style:none;display:grid;gap:10px;font-size:15px;color:var(--muted)}
+footer ul a:hover{color:var(--cyan)}
+.foot-bottom{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+
+[data-reveal]{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.8,.3,1),transform .8s cubic-bezier(.2,.8,.3,1);transition-delay:calc(var(--d,0) * .08s)}
+[data-reveal].in{opacity:1;transform:none}
+
+@media (max-width:980px){
+  .hero-grid,.app-inner,.about-grid{grid-template-columns:1fr;gap:44px}
+  .forms-grid{grid-template-columns:repeat(2,1fr)}
+  .app-band{padding:48px 32px}
+}
+@media (max-width:700px){
+  body{font-size:16px}
+  nav{display:none}
+  .hero{padding:150px 0 70px}
+  section{padding:80px 0}
+  .forms-grid{grid-template-columns:1fr}
+  .news-item{grid-template-columns:1fr;gap:14px;padding:26px}
+  .news-item.featured{padding:30px 26px}
+  .news-date{display:flex;align-items:baseline;gap:10px}
+  .news-date b{font-size:22px}
+  .arrow{display:none}
+  .stats{gap:28px}
+  .foot-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  [data-reveal],h1 .word,h1 .grad,.lead,.hero-actions,.stats,.pinned{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="topline"></div>
+<div class="aurora"><div class="orb a"></div><div class="orb b"></div><div class="orb c"></div><div class="orb d"></div><div class="orb e"></div></div>
+<div class="grain"></div>
+
+<header id="hdr">
+  <div class="wrap">
+    <a class="wordmark" href="#top"><span class="tri" aria-hidden="true"></span>Creascola DÖK</a>
+    <nav>
+      <a href="#hirek">Hírek</a>
+      <a href="#ugyintezes">Ügyintézés</a>
+      <a href="#app">DÖK App</a>
+      <a href="#rolunk">Rólunk</a>
+    </nav>
+    <a class="btn btn-red" href="https://creascoladok.hu/app"><span class="dot"></span>Belépés</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot" style="color:var(--mint)"></span>2026/27-es tanév · 3 nyitott jelentkezés</span>
+        <h1><span class="word" style="--i:0">A</span> <span class="word" style="--i:1">diákok</span> <span class="word grad" style="--i:2">hangja</span><br><span class="word" style="--i:3">a</span> <span class="word" style="--i:4">Creascolában.</span></h1>
+        <p class="lead">Itt tesszük közzé, mit intéztünk, mire lehet jelentkezni, és hol adhatod le a kéréseidet. Minden osztály, minden évfolyam.</p>
+        <div class="hero-actions">
+          <a class="btn btn-grad" href="#ugyintezes">Nyitott jelentkezések</a>
+          <a class="btn btn-glass" href="#hirek">Mi történt mostanában</a>
+        </div>
+        <div class="stats">
+          <div class="stat" style="--c:var(--mint)"><b data-count="24">0</b><span>osztályképviselő</span></div>
+          <div class="stat" style="--c:var(--cyan)"><b data-count="18">0</b><span>ülés egy tanévben</span></div>
+          <div class="stat" style="--c:var(--pink)"><b data-count="640">0</b><span>diák a diáknapon</span></div>
+        </div>
+      </div>
+
+      <aside class="pinned" id="tilt">
+        <div class="tagline"><span class="dot"></span>Nyitott pályázat</div>
+        <h2>Iskolarádió vezetője</h2>
+        <p>A Creascola Rádió adásaiért felelős diákvezetőt keresünk. Műsorszerkesztés, stáb koordinálása, heti egy egyeztetés a DÖK-kel.</p>
+        <dl>
+          <div><dt>Jelentkezhet</dt><dd>5–12. évfolyam</dd></div>
+          <div><dt>Beadás módja</dt><dd>Online űrlap</dd></div>
+          <div><dt>Határidő</dt><dd>2026. Október  9.</dd></div>
+        </dl>
+        <a class="btn btn-grad" href="#ugyintezes">Jelentkezem</a>
+      </aside>
+    </div>
+  </section>
+
+  <div class="ticker">
+    <div class="ticker-track" id="track">
+      <span><b style="color:var(--mint)">Szept. 30.</b> — osztályképviselő bejelentése</span>
+      <span><b style="color:var(--cyan)">Okt. 9.</b> — Rádió Vezető pályázat határideje</span>
+      <span><b style="color:var(--violet)">Szept. 16.</b> — DÖK ülés, Auditórium, 12:35</span>
+      <span><b style="color:var(--pink)">Szept. 23.</b> — őszi papírgyűjtés indul</span>
+      <span><b style="color:var(--amber2)">Folyamatos</b> — ötlet- és panaszláda nyitva</span>
+    </div>
+  </div>
+
+  <section id="hirek">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <h2>Friss <em>hírek</em></h2>
+        <p>Döntések, beszámolók és rendezvények — amit a DÖK csinált, és ami ebből lett.</p>
+      </div>
+      <div class="news-list">
+
+        <a class="news-item featured spot" href="#" data-reveal style="--c:var(--cyan);--d:0">
+          <div class="news-date"><b>08</b>2026. szeptember</div>
+          <div class="news-body">
+            <span class="tag">Iskolarádió</span>
+            <h3>Elindult az őszi adás, minden nagyszünetben</h3>
+            <p>Szeptembertől újra szól a Creascola Rádió a 20 perces szünetekben. Zenei kívánságot a stúdió ajtajára kitett QR-kóddal vagy az ötletládán keresztül lehet küldeni.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">↗</div>
+        </a>
+
+        <a class="news-item spot" href="#" data-reveal style="--c:var(--violet);--d:1">
+          <div class="news-date"><b>02</b>2026. szeptember</div>
+          <div class="news-body">
+            <span class="tag">Döntés</span>
+            <h3>Megalakult az idei elnökség</h3>
+            <p>Az alakuló ülésen 22 igen szavazattal megválasztottuk a tanév elnökségét. A jegyzőkönyv a DÖK Appban olvasható.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">↗</div>
+        </a>
+
+        <a class="news-item spot" href="#" data-reveal style="--c:var(--pink);--d:2">
+          <div class="news-date"><b>12</b>2026. június</div>
+          <div class="news-body">
+            <span class="tag">Rendezvény</span>
+            <h3>Diáknap: 14 program, 40 résztvevő</h3>
+            <p>Az eső ellenére minden állomás elindult. A visszajelzésekből összeállított beszámolót az utolsó ülésen tárgyaltuk.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">↗</div>
+        </a>
+
+        <a class="news-item spot" href="#" data-reveal style="--c:var(--mint);--d:3">
+          <div class="news-date"><b>20</b>2026. május</div>
+          <div class="news-body">
+            <span class="tag">Beszámoló</span>
+            <h3>Elkészült a pihenőzóna a második emeleten</h3>
+            <p>A diákok által kért ülőbútorokat a februári keretből vásároltuk meg. A használati rendről az osztályképviselők döntöttek.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">↗</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="ugyintezes">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <h2>Űrlapok és <em>pályázatok</em></h2>
+        <p>Minden beadvány ide érkezik. A nyitott jelentkezéseknél a határidő kötelező, a folyamatosakat bármikor kitöltheted.</p>
+      </div>
+      <div class="forms-grid">
+
+        <a class="form-card spot" href="#" data-reveal style="--c:var(--cyan);--d:0">
+          <span class="bar"></span>
+          <div class="row"><span class="type">Pályázat</span><span class="pill open">Nyitva</span></div>
+          <h3>Rádió Vezető</h3>
+          <p>Az iskolarádió diákvezetői posztjára. Rövid motiváció és egy műsorterv szükséges.</p>
+          <div class="foot">Határidő: Október 9.</div>
+        </a>
+
+        <a class="form-card spot" href="#" data-reveal style="--c:var(--amber2);--d:1">
+          <span class="bar"></span>
+          <div class="row"><span class="type">Űrlap</span><span class="pill rolling">Folyamatos</span></div>
+          <h3>Ötlet- és panaszláda</h3>
+          <p>Bármilyen javaslat, észrevétel vagy probléma. Névtelenül is beküldhető.</p>
+          <div class="foot">Válasz 14 napon belül</div>
+        </a>
+
+        <a class="form-card spot" href="#" data-reveal style="--c:var(--mint);--d:2">
+          <span class="bar"></span>
+          <div class="row"><span class="type">Űrlap</span><span class="pill open">Nyitva</span></div>
+          <h3>Osztályképviselő bejelentése</h3>
+          <p>Az osztályfőnöki órán megválasztott képviselő és helyettes adatainak leadása.</p>
+          <div class="foot">Határidő: szeptember 30.</div>
+        </a>
+
+        <a class="form-card spot" href="#" data-reveal style="--c:var(--violet);--d:3">
+          <span class="bar"></span>
+          <div class="row"><span class="type">Űrlap</span><span class="pill rolling">Folyamatos</span></div>
+          <h3>Támogatási kérelem</h3>
+          <p>Kirándulás, verseny vagy osztályrendezvény költségeihez a DÖK éves keretéből.</p>
+          <div class="foot">Elbírálás a következő ülésen</div>
+        </a>
+
+        <a class="form-card spot" href="#" data-reveal style="--c:var(--pink);--d:4">
+          <span class="bar"></span>
+          <div class="row"><span class="type">Űrlap</span><span class="pill open">Nyitva</span></div>
+          <h3>Terem- és eszközigénylés</h3>
+          <p>Diákrendezvényhez terem, hangosítás vagy projektor foglalása.</p>
+          <div class="foot">Leadás 10 nappal az esemény előtt</div>
+        </a>
+
+        <a class="form-card soon-card" href="#" data-reveal style="--c:var(--muted);--d:5">
+          <span class="bar"></span>
+          <div class="row"><span class="type">Pályázat</span><span class="pill soon">Hamarosan</span></div>
+          <h3>Diáknap programötlet</h3>
+          <p>A tavaszi diáknap állomásaira lehet majd ötletet és stábot benevezni.</p>
+          <div class="foot">Nyitás: 2027. február</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="app">
+    <div class="wrap">
+      <div class="app-band" data-reveal>
+        <div class="app-inner">
+          <div>
+            <h2>A munka az appban zajlik.</h2>
+            <p>Ha osztályképviselő vagy, elnökségi tag vagy munkacsoportban dolgozol, itt találsz mindent. Iskolai fiókkal tudsz belépni.</p>
+            <a class="btn btn-grad" href="https://creascoladok.hu/app">Belépés a DÖK Appba</a>
+            <div class="app-url">creascoladok.hu/app</div>
+          </div>
+          <ul class="app-list">
+            <li style="--c:var(--cyan)"><i></i>Ülések napirendje és jegyzőkönyvek</li>
+            <li style="--c:var(--mint)"><i></i>Beérkezett űrlapok és pályázatok</li>
+            <li style="--c:var(--violet)"><i></i>Szavazások és határozatok</li>
+            <li style="--c:var(--pink)"><i></i>Feladatok, határidők, munkacsoportok</li>
+            <li style="--c:var(--amber2)"><i></i>Keret és költések nyilvántartása</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rolunk">
+    <div class="wrap about-grid">
+      <div class="about" data-reveal>
+        <h2>Mi az a DÖK?</h2>
+        <p>A diákönkormányzat a Creascola diákjainak választott képviselete. Minden osztály delegál egy képviselőt, ők döntenek a diákprogramokról, a DÖK éves keretének felhasználásáról, és ők viszik az iskolavezetés elé a diákok kéréseit.</p>
+        <p>Az üléseink nyilvánosak: ha van egy ügyed, be is jöhetsz elmondani. Ha ez túl sok, írd meg az ötletládán keresztül — ugyanúgy napirendre kerül.</p>
+      </div>
+      <dl class="facts" data-reveal style="--d:1">
+        <div><dt>Ülések</dt><dd>Hetente szerda 12:35</dd></div>
+        <div><dt>Helyszín</dt><dd>Auditórium</dd></div>
+        <div><dt>Tagok</dt><dd>60 osztályképviselő</dd></div>
+        <div><dt>Elnökség</dt><dd>Elnök, Elnökhelyettes, Titkár</dd></div>
+        <div><dt>Kapcsolat</dt><dd>diakonkormanyzat@creascola.hu</dd></div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="#top"><span class="tri" aria-hidden="true"></span>Creascola DÖK</a>
+        <ul style="margin-top:18px">
+          <li>Creascola Diákönkormányzat</li>
+          <li>Auditorium</li>
+          <li><a href="mailto:diakonkormanyzat@creascola.hu">dok@creascola.hu</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Oldal</h4>
+        <ul>
+          <li><a href="#hirek">Hírek</a></li>
+          <li><a href="#ugyintezes">Űrlapok és pályázatok</a></li>
+          <li><a href="#rolunk">Rólunk</a></li>
+          <li><a href="https://creascoladok.hu/app">DÖK App</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Dokumentumok</h4>
+        <ul>
+          <li><a href="#">Szervezeti és működési szabályzat</a></li>
+          <li><a href="#">Ülésjegyzőkönyvek</a></li>
+          <li><a href="#">Éves munkaterv</a></li>
+          <li><a href="#">Adatkezelési tájékoztató</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Creascola Diákönkormányzat</span>
+      <span>creascoladok.hu</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const hdr = document.getElementById("hdr");
+addEventListener("scroll", () => hdr.classList.toggle("stuck", scrollY > 20), {passive:true});
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+}, {threshold:.15, rootMargin:"0px 0px -60px 0px"});
+document.querySelectorAll("[data-reveal]").forEach(el => io.observe(el));
+
+document.querySelectorAll(".spot").forEach(el => {
+  el.addEventListener("pointermove", e => {
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", (e.clientX - r.left) + "px");
+    el.style.setProperty("--my", (e.clientY - r.top) + "px");
+  });
+});
+
+const tilt = document.getElementById("tilt");
+if (tilt && !reduced && matchMedia("(pointer:fine)").matches) {
+  tilt.addEventListener("pointermove", e => {
+    const r = tilt.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5;
+    const y = (e.clientY - r.top) / r.height - .5;
+    tilt.style.transform = `perspective(1000px) rotateY(${x * 7}deg) rotateX(${-y * 7}deg) translateY(-4px)`;
+  });
+  tilt.addEventListener("pointerleave", () => { tilt.style.transform = "perspective(1000px)"; });
+}
+
+const track = document.getElementById("track");
+track.innerHTML += track.innerHTML;
+
+const counters = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, target = +el.dataset.count;
+    counters.unobserve(el);
+    if (reduced) { el.textContent = target; return; }
+    const start = performance.now(), dur = 1400;
+    const step = now => {
+      const p = Math.min((now - start) / dur, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
+}, {threshold:.6});
+document.querySelectorAll("[data-count]").forEach(el => counters.observe(el));
+</script>
+
+</body>
+</html>
